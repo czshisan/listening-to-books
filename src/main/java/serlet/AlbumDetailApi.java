@@ -38,7 +38,7 @@ public class AlbumDetailApi extends HttpServlet {
         }
 
         int aidInt = Integer.parseInt(aid); //把 aid 转成 int 类型
-        //Album album = new Album();
+
 
         //进行查询
         //从 album 和 story 表中查询

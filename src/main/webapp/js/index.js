@@ -38,7 +38,7 @@ function fetchAlbumList(){
 
     var url = "/api/album-list.json";
     var keyword = getParameter("keyword");
-    if (!keyword) {
+    if (keyword) {
         url += `?keyword=${encodeURIComponent(keyword)}`;
     }
 
