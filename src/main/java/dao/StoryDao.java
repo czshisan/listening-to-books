@@ -3,6 +3,7 @@ package dao;
 import model.Story;
 import util.DBUtil;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoryDao {
+    //通过 sid 查找故事
     public Story selectOneUsingSid(int sid) throws SQLException {
         try(Connection c = DBUtil.getConnection()) {
             String sql = "select name, created_at, count from story where sid = ?";
@@ -54,5 +56,21 @@ public class StoryDao {
             }
         }
         return storyList;
+    }
+
+    public InputStream selectOneAudioColumnUsingSid(int sid) throws  SQLException{
+        try(Connection c = DBUtil.getConnection()){
+            String sql = "select audio from story where sid = ?";
+            try (PreparedStatement s = c.prepareStatement(sql)) {
+                s.setInt(1, sid);
+                try (ResultSet rs = s.executeQuery()) {
+                    if(!rs.next()){
+                        return null;
+                    }
+
+                    return rs.getBinaryStream("audio");
+                }
+            }
+        }
     }
 }

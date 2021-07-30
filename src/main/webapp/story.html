@@ -10,7 +10,7 @@
         <audio controls src=""></audio>
     </main>
 
-    <script src="util.js"></script>
+    <script src="/js/util.js"></script>
     <script>
         window.onload = function(){
             var mainElement = document.querySelector("main");
@@ -32,7 +32,7 @@
                     <h1>${story.name}</h1>
                     <span class="createdAt">${story.createdAt}</span>
                     <span class="count">${story.count}</span>
-                    <audio controls src="${sid}"></audio>
+                    <audio controls src="/get-audio?${sid}"></audio>
                 `;
             });
         }
