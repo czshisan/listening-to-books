@@ -3,10 +3,7 @@ package dao;
 import model.Album;
 import util.DBUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +73,48 @@ public class AlbumDao {
                         album.cover = rs.getString("cover");
                         album.count = rs.getInt("count");
 
+                        albumList.add(album);
+                    }
+                }
+            }
+        }
+        return albumList;
+    }
+
+    public int insert(int uid, String name, String brief, String cover, String header) throws SQLException{
+        try (Connection c = DBUtil.getConnection()){
+            String sql = "insert into album (uid, name, brief, cover, header) values (?, ?, ?, ?, ?)";
+            try (PreparedStatement s = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                s.setInt(1,uid);
+                s.setString(2,name);
+                s.setString(3, brief);
+                s.setString(4, cover);
+                s.setString(5,header);
+
+                s.executeUpdate();
+
+                try(ResultSet rs = s.getGeneratedKeys()) {
+                    rs.next();
+                    return rs.getInt(1);
+                }
+            }
+        }
+    }
+
+    public List<Album> selectListUsingUid(int uid) throws SQLException {
+        List<Album> albumList = new ArrayList<>();
+        String sql = "select aid, name, cover, count from album where uid = ? order by aid desc";
+        try (Connection c = DBUtil.getConnection()) {
+            try (PreparedStatement s = c.prepareStatement(sql)){
+                s.setInt(1, uid);
+
+                try (ResultSet rs = s.executeQuery()){
+                    while (rs.next()) {
+                        Album album = new Album();
+                        album.aid = rs.getInt("aid");
+                        album.name = rs.getString("name");
+                        album.cover = rs.getString("cover");
+                        album.count = rs.getInt("count");
                         albumList.add(album);
                     }
                 }

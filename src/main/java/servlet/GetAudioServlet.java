@@ -1,4 +1,4 @@
-package serlet;
+package servlet;
 
 import service.StoryService;
 

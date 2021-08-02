@@ -28,4 +28,13 @@ public class AlbumService {
         album.storyList = storyDao.selectListUsingAid(aid);
         return album;
     }
+
+    public int save(int uid, String name, String brief, String cover, String header) throws SQLException {
+        albumDao.insert(uid, name, brief, cover, header);
+        return uid;
+    }
+
+    public List<Album> listUsingUid(int uid) throws SQLException {
+        return albumDao.selectListUsingUid(uid);
+    }
 }

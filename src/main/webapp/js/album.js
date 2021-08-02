@@ -15,8 +15,8 @@ var meta = document.querySelector(".album-meta");
 function updateAlbumMeta(album){
     meta.innerHTML = `<h1>${album.name}</h1>
         <p>${album.brief}</p>
-        <img class="cover" src="album.cover">
-        <img class="header" src="album.header>
+        <img class="cover" src="${album.cover}">
+        <img class="header" src="${album.header}">
         <span class="count">${album.count}</span>
         <span class="createdAt">${album.createdAt}</span>`;
 }
