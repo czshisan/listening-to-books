@@ -73,4 +73,17 @@ public class StoryDao {
             }
         }
     }
+
+    public void insert(int aid, String name, InputStream audio) throws SQLException{
+        try (Connection c = DBUtil.getConnection()) {
+            String sql = "insert into story (aid, name, audio) values (?, ?, ?)";
+            try (PreparedStatement s = (c.prepareStatement(sql))) {
+                s.setInt(1, aid);
+                s.setString(2, name);
+                s.setBlob(3, audio);
+
+                s.executeUpdate();
+            }
+        }
+    }
 }

@@ -25,6 +25,7 @@ public class GetAudioServlet extends HttpServlet {
         }
 
         int sidInt = Integer.parseInt(sid);
+        resp.setContentType("audio/ogg; codecs=opus");
         try {
             InputStream is = storyService.getAudio(sidInt);
             if(is == null) {

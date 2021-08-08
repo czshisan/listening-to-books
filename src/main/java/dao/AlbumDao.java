@@ -11,7 +11,7 @@ public class AlbumDao {
     //根据一个专辑去查另一个专辑
     public Album selectOneUsingAid(int aid) throws SQLException {
         try (Connection c = DBUtil.getConnection()) {
-            String sql = "select aid, name, cover, header, brief, created_at, count from album where aid = ?";
+            String sql = "select uid, name, cover, header, brief, created_at, count from album where aid = ?";
             try (PreparedStatement s = c.prepareStatement(sql)){
                 s.setInt(1, aid);
                 try(ResultSet rs = s.executeQuery()){
@@ -22,6 +22,7 @@ public class AlbumDao {
 
                     Album album = new Album();
                     album.aid = aid;
+                    album.uid = rs.getInt("uid");
                     album.name = rs.getString("name");
                     album.cover = rs.getString("cover");
                     album.count = rs.getInt("count");

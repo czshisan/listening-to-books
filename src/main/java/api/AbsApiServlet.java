@@ -69,11 +69,11 @@ public abstract class AbsApiServlet extends HttpServlet {
         resp.getWriter().println(json);
     }
 
-    protected Object doGetInternal(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ApiException{
+    protected Object doGetInternal(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ApiException, IOException, ServletException {
         throw new ApiException(405,"不支持的 HTTP 方法");
     }
 
-    protected Object doPostInternal(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ApiException{
+    protected Object doPostInternal(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ApiException, IOException, ServletException{
         throw new ApiException(405,"不支持的 HTTP 方法");
     }
 }

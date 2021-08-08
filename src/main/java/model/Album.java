@@ -8,6 +8,8 @@ import java.util.List;
 
 public class Album {
     public Integer aid;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer uid;
     public String name; //专辑名称
     public String cover;
     public Integer count; //播放数
